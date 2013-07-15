@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>BERT-AS3</groupId>
+    <artifactId>BERT-AS3</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>swc</packaging>
+
+    <parent>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-flex-super-pom</artifactId>
+        <version>4.0-beta-3</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.flex>4.6.b.23201</version.flex>
+        <version.flexmojos>4.0-beta-3</version.flexmojos>
+        <version.player>13</version.player>
+
+        <dir.source.flex>src/main/flex</dir.source.flex>
+        <dir.source.flextest>src/test/flex</dir.source.flextest>
+        <dir.source.resources>src/main/resources</dir.source.resources>
+    </properties>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <sourceDirectory>${basedir}/src/main/flex</sourceDirectory>
+        <testSourceDirectory>${basedir}/src/test/flex</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${version.flexmojos}</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <targetPlayer>11.1</targetPlayer>
+                    <debug>true</debug>
+                    <ditaSkip>true</ditaSkip>
+                    <reduceMergeABC>false</reduceMergeABC>
+                    <reduceMergeCF>false</reduceMergeCF>
+                    <reduceSortCPool>false</reduceSortCPool>
+                    <showWarnings>false</showWarnings>
+
+                    <localesSourcePath>${project.basedir}/src/main/resources/locales/{locale}</localesSourcePath>
+                    <localesCompiled>
+                        <locale>en_US</locale>
+                    </localesCompiled>
+
+                    <staticLinkRuntimeSharedLibraries>false</staticLinkRuntimeSharedLibraries>
+                    <verifyDigests>false</verifyDigests>
+                    <computeDigest>false</computeDigest>
+
+                    <keepAs3Metadatas>
+                        <metadata>Inject</metadata>
+                        <metadata>Init</metadata>
+                        <metadata>Destroy</metadata>
+                        <metadata>Observe</metadata>
+                        <metadata>MessageDispatcher</metadata>
+                        <metadata>MessageHandler</metadata>
+                        <metadata>CommandResult</metadata>
+                        <metadata>CommandComplete</metadata>
+                        <metadata>CommandError</metadata>
+                        <metadata>Publish</metadata>
+                        <metadata>Subscribe</metadata>
+                        <metadata>PublishSubscribe</metadata>
+                    </keepAs3Metadatas>
+
+                    <advancedAntiAliasing>true</advancedAntiAliasing>
+                    <maxCachedFonts>20</maxCachedFonts>
+                    <maxGlyphsPerFace>1000</maxGlyphsPerFace>
+                    <managers>
+                        <manager>flash.fonts.AFEFontManager</manager>
+                        <manager>flash.fonts.CFFFontManager</manager>
+                    </managers>
+
+                    <storepass/>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>${version.flex}</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${version.flex}</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>framework</artifactId>
+            <version>${version.flex}</version>
+            <type>swc</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>spark</artifactId>
+            <version>${version.flex}</version>
+            <type>swc</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>sparkskins</artifactId>
+            <version>${version.flex}</version>
+            <type>swc</type>
+            <scope>theme</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flexunit</groupId>
+            <artifactId>flexunit</artifactId>
+            <version>4.1.0</version>
+            <classifier>flex</classifier>
+            <type>swc</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>spark</artifactId>
+            <type>swc</type>
+            <scope>theme</scope>
+            <version>${version.flex}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>1.1.3</version>
+            <classifier>flex</classifier>
+            <type>swc</type>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>Sonatype Repository Flexgroup</id>
+            <url>https://repository.sonatype.org/content/groups/flexgroup</url>
+        </repository>
+        <repository>
+            <id>Sonatype Repository</id>
+            <url>https://repository.sonatype.org/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>Ivan Dachenko Repository</id>
+            <url>http://ivan-dyachenko.github.com/flash-mvn-repo</url>
+        </repository>
+        <repository>
+            <id>Flex 4.6</id>
+            <url>http://cortizone.googlecode.com/hg/maven-repositories</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>Sonatype Repository Flexgroup</id>
+            <url>https://repository.sonatype.org/content/groups/flexgroup</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>Sonatype Repository</id>
+            <url>https://repository.sonatype.org/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>Maven Repository</id>
+            <url>http://repo.maven.apache.org/maven2</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>oss.sonatype.org</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+</project>
